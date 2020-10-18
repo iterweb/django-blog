@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Авторизация | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+
+    <br>
+    <div class="row">
+        {% if request.user.is_authenticated %}
+
+            Вы успешно авторизировались
+
+        {% else %}
+            <div class="container d-flex h-100">
+                <div class="row align-self-center w-100">
+
+                    <div class="col-lg-4 mx-auto">
+                        <div class="card card-small">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0 font-weight-bold">Авторизация</h6>
+                            </div>
+
+                            <div class="form-group col-md-12">
+
+                                <form method="post">
+
+                                    {% csrf_token %}
+                                    {{form.as_p}}
+                                    <button type="submit" class="mb-2 btn btn-sm btn-outline-primary mr-1">Вход</button>
+                                </form>
+                            </div>
+                            <div class="alert alert-info" role="alert">
+                                У меня нет аккаунта => <a href="{% url 'register' %}" class="alert-link
+                    font-weight-bold">Регистрация</a>.
+                            </div>
+                            <a href="{% url "password_reset" %}" class="badge badge-light">Забыли пароль?</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock content %}

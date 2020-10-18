@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }} | {{ block.super }}
+{% endblock title %}
+
+{% block page-header %}
+
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Dashboard</span>
+                <h3 class="page-title">Записи по тегу: {{ title }}</h3>
+              </div>
+            </div>
+
+{% endblock page-header %}
+
+{% block left-popup %}
+    {% include 'inc/_left-popup.html' %}
+{% endblock left-popup %}
+
+{% block ads %}
+    {% include 'ads/_ads-5.html' %}
+{% endblock ads %}
+
+{% block content %}
+
+<div class="row">
+{% for post in posts %}
+
+              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <div class="card card-small card-post card-post--1">
+                  <div class="card-post__image" style="background-image: url({% if post.photo %}
+                      {{ post.photo.url }}
+                      {% else %}
+                      {% static 'no_img/no_post_image.png' %}
+                      {% endif %}
+                  );">
+                    <a href="{{ post.category.get_absolute_url }}" class="card-post__category badge badge-pill badge-primary"
+                    >{{ post.category }}</a>
+                    <div class="card-post__author d-flex">
+                      <a href="{% url 'user_profile' post.author.pk %}" class="card-post__author-avatar
+                      card-post__author-avatar--small"
+                         style="background-image: url({% if post.author.avatar %}
+                      {{ post.author.avatar.url }}
+                      {% else %}
+                      {% static 'no_img/no_post_image.png' %}
+                      {% endif %});">{{ post.author.first_name }} {{ post.author.last_name }}</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="text-fiord-blue" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h5>
+                    <p class="card-text d-inline-block mb-3">{{ post.content|truncatewords:15 }}</p>
+                    <span class="text-muted">{{ post.updated_at }}</span>
+                  </div>
+                </div>
+              </div>
+{% endfor %}
+</div>
+{% endblock content %}
+
+{% block pagination %}
+    {% include 'inc/_pagination.html' %}
+{% endblock pagination %}
+
+{% block right-popup %}
+
+{% endblock right-popup %}

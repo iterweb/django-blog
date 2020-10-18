@@ -1,0 +1,30 @@
+<div class="nav-wrapper">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">
+            <i class="material-icons">edit</i>
+            <span>Главная</span>
+          </a>
+        </li>
+
+
+{% for category in categories %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ category.get_absolute_url }}">
+            <i class="material-icons">vertical_split</i>
+            <span>{{ category.title }} <span class="badge badge-primary badge-pill right-container">
+                {{ category.cnt }}</span></span>
+          </a>
+        </li>
+
+{% endfor %}
+
+          <li class="nav-item">
+          <a class="nav-link " href="errors.html">
+            <i class="material-icons">error</i>
+            <span>Errors</span>
+          </a>
+        </li>
+      </ul>
+    </div>

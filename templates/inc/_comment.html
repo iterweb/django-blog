@@ -1,0 +1,140 @@
+{% load static %}
+{% load user_group_filter %}
+
+{% if request.user.is_authenticated %}
+    <form class="mb-3" action="{% url 'add_comment' post.id %}" method="post" enctype="multipart/form-data" id="formComment">
+        {% csrf_token %}
+        {{form.non_field.errors}}
+        <input type="hidden" name="parent" id="contactparent" value="">
+
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="{{ form.text.id_for_label }}">Комментарий</label>
+                {{ form.text }}
+                <div class="errorlist">{{form.text.errors}}</div>
+            </div>
+
+            {% if request.user|is_group:"Moderator" or request.user|is_group:"Admin" %}
+
+                    <div class="form-group col-md-4">
+                        <label for="{{ form.published.id_for_label }}">Опубликовать</label>
+                        {{ form.published }}
+                        <div class="errorlist">{{form.published.errors}}</div>
+                    </div>
+
+                {% endif %}
+
+
+                    <div class="form-group col-md-8">
+                        <label for="{{ form.captcha.id_for_label }}">Каптча</label>
+                        {{ form.captcha }}
+                        <div class="errorlist">{{form.captcha.errors}}</div>
+                    </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-accent">Отправить</button>
+    </form>
+{% else %}
+    <div class="font-weight-bold mt-1 mb-3" style="font-size: 14px">
+
+        Только <a href="{% url 'login' %}">зарегистрированные</a> пользователи могут участвовать в
+        дискиссиях!
+
+    </div>
+
+{% endif %}
+
+
+
+
+
+
+{% for comment in post.get_comments %}
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="mx-auto">
+                    {% if comment.name.avatar %}
+                        <img class="rounded-circle" src="{{ comment.name.avatar.url }}" width="70"> </div>
+                    {% else %}
+                        <img class="rounded-circle" src="{% static 'no_img/no-image.png' %}" width="70">
+                        </div>
+
+                    {% endif %}
+
+        </div>
+        <div class="col-lg-10">
+            <div class="border-bottom">
+                {% if comment.name.first_name %}
+                    <h6 class="mb-0"><a href="{{ comment.name.get_absolute_url }}">{{ comment.name.first_name }}
+                        {{ comment.name.last_name }}</a></h6>
+                {% else %}
+                    <h6 class="mb-0"><a href="{{ comment.name.get_absolute_url }}">{{ comment.name }}</a></h6>
+                {% endif %}
+
+            </div>
+
+            <div class="font-weight-light mt-1" style="font-size: 14px">
+
+                {{ comment.text }}
+
+            </div>
+            {% if comment.name.first_name %}
+                <a href="#formComment" onclick="addComment('{{ comment.name.first_name }}', '{{ comment.id }}')">Ответить</a>
+            {% else %}
+                <a href="#formComment" onclick="addComment('{{ comment.name }}', '{{ comment.id }}')">Ответить</a>
+            {% endif %}
+
+
+            {% for sub_com in comment.comment_set.all %}
+                <div class="media mt-3 editContent">
+                    <a class="pr-3">
+                        {% if sub_com.name.avatar %}
+                            <img class="rounded-circle" src="{{ sub_com.name.avatar.url }}" width="70">
+                        {% else %}
+                            <img class="rounded-circle" src="{% static 'no_img/no-image.png' %}" width="70">
+
+
+                        {% endif %}
+                    </a>
+                    <div class="media-body">
+                        {% if sub_com.name.first_name %}
+                            <h6 class="mb-0"><a href="{{ sub_com.name.get_absolute_url }}">{{ sub_com.name.first_name }}
+                                {{ sub_com.name.last_name }}</a></h6>
+                        {% else %}
+                            <h6 class="mb-0"><a href="{{ sub_com.name.get_absolute_url }}">{{ sub_com.name }}</a></h6>
+                        {% endif %}
+                        <div class="font-weight-light mt-1" style="font-size: 14px">
+
+                            {{ sub_com.text }}
+
+                        </div>
+                        {% if comment.name.first_name %}
+                            <a href="#formComment" style="font-size: 12px" onclick="addComment('
+                                    {{ comment.name.first_name }}',
+                                    '{{ comment.id }}')">Ответить</a>
+                        {% else %}
+                            <a href="#formComment" style="font-size: 12px" onclick="addComment('{{ comment.name }}',
+                                    '{{ comment.id }}')
+                                    ">Ответить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+    </div>
+{% endfor %}
+
+<script>
+    function addComment(name, id) {
+        document.getElementById("contactparent").value = id;
+
+    }
+</script>

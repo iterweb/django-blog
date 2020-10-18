@@ -1,0 +1,25 @@
+<li class="nav-item border-right dropdown notifications">
+                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link-icon__wrapper">
+                        <i class="material-icons">&#xE7F4;</i>
+                        <span class="badge badge-pill badge-danger">{{ comment_count }}</span>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+
+                    {% for com_f in comment_false %}
+
+                        <div class="row ml-1 mr-1 mt-2">
+                            <div class="col-12">
+                                <a style="font-size: 15px" class="font-weight-bold" href="{{ com_f.post.get_absolute_url }}" target="_blank">📑
+                                    {{ com_f.post.title|truncatechars_html:40 }}</a>
+                            </div>
+                            <div class="col-12">
+                                <a  href="{% url 'update_comment' com_f.pk %}" target="_blank">✏ {{ com_f.text|truncatewords_html:10 }}</a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </li>

@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Страница пользователя
+{% endblock title %}
+
+{% block content %}
+
+    <div class="main-content-container container-fluid px-4">
+        <!-- Page Header -->
+        <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle"><h4>пользователь</h4></span>
+            </div>
+        </div>
+        <!-- End Page Header -->
+        <!-- Default Light Table -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card card-small mb-4 pt-3">
+                    <div class="card-header border-bottom text-center">
+                        <div class="mb-3 mx-auto">
+                            {% if detail.avatar %}
+                                <img class="rounded-circle" src="{{ detail.avatar.url }}" alt="{{ detail.first_name }}
+{{ detail.last_name }}" width="180"> </div>
+                            {% else %}
+                                <img class="rounded-circle" src="{% static 'no_img/no-image.png' %}" alt="
+{{ detail.first_name }} {{ detail.last_name }}" width="180"> </div>
+                            {% endif %}
+                    {% if detail.first_name %}
+                        <h4 class="mb-0">{{ detail.first_name }} {{ detail.last_name }}</h4>
+                    {% endif %}
+                    <span class="text-muted d-block mb-2">
+                        {% if detail.label %}
+                            {{ detail.label }}
+                        {% endif %}
+
+                        <div class="text-nowrap mt-1">
+                    {% for group in detail.groups.all %}
+
+                        <a>
+                {% if group.name == 'Admin' %}
+                    <span class="badge badge-primary">{{ group.name }}</span>
+                {% elif group.name == 'Moderator' %}
+                    <span class="badge badge-success">{{ group.name }}</span>
+                {% elif group.name == 'Editor' %}
+                    <span class="badge badge-danger">{{ group.name }}</span>
+                {% endif %}
+                    </a>
+
+                    {% endfor %}
+                    </div>
+
+                    </span>
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-4">
+                        <div class="progress-wrapper">
+                            <div class="text-center">
+                                {% if detail.facebook %}
+                                    <a href="{{ detail.facebook }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/facebook.ico' %}"
+                                            alt="facebook" width="40"></a>
+                                {% endif %}
+                                {% if detail.vk %}
+                                    <a href="{{ detail.vk }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/vk.ico' %}" alt="vkontakte"
+                                            width="40"></a>
+                                {% endif %}
+                                {% if detail.instagram %}
+                                    <a href="{{ detail.instagram }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/instagram.ico' %}"
+                                            alt="instagram" width="40"></a>
+                                {% endif %}
+                                {% if detail.telegram %}
+                                    <a href="{{ detail.telegram }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/telegram.ico' %}"
+                                            alt="telegram" width="40"></a>
+                                {% endif %}
+                                {% if detail.youtube %}
+                                    <a href="{{ detail.youtube }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/youtube.ico' %}" alt="youtube"
+                                            width="40"></a>
+                                {% endif %}
+                                {% if detail.github %}
+                                    <a href="{{ detail.github }}" rel="noopener noreferrer nofollow" target="_blank"><img
+                                            class="rounded-circle" src="{% static 'social/github.ico' %}" alt="github"
+                                            width="40"></a>
+                                {% endif %}
+                                {% if detail.site %}
+                                    <a href="{{ detail.site  }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/site.ico' %}"
+                                                                                                                         alt="ownsite" width="40"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% if detail.bio %}
+                        <li class="list-group-item p-4">
+                            <strong class="text-muted d-block mb-2">Био</strong>
+                            <span>{{ detail.bio }}</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-small mb-3">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Реклама</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-3">
+                        <div class="row">
+                            <div class="col-lg-6 ">
+                                Реклама тут
+                            </div>
+                            <div class="col-lg-6">
+                                Реклама тут
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="card card-small mb-4">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                    Статьи пользователя
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+
+                                <ul class="list-group list-group-flush">
+
+                                    {% if user_posts %}
+                                        {% for post in user_posts %}
+                                            <li class="list-group-item"><a href="{{ post.get_absolute_url }}" class="badge badge-light">{{ post.title }}</a></li>
+
+                                        {% endfor %}
+                                    {% else %}
+                                        У этого пользователя статей нет!
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- End Default Light Table -->
+
+    </div>
+
+{% endblock content %}

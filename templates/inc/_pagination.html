@@ -1,0 +1,39 @@
+{% if page_obj.has_other_pages %}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+
+      {% if page_obj.has_previous %}
+
+          <li class="page-item">
+             <a class="page-link" href="?{{ search_post }}page={{ page_obj.previous_page_number }}" tabindex="-1">Назад</a>
+          </li>
+
+      {% endif %}
+
+      {% for p in page_obj.paginator.page_range %}
+
+          {% if page_obj.number == p %}
+
+              <li class="page-item active"><a class="page-link" href="?{{ search_post }}page={{ p }}">{{ p }}</a></li>
+
+          {% elif p > page_obj.number|add:-4 and p < page_obj.number|add:4 %}
+
+            <li class="page-item"><a class="page-link" href="?{{ search_post }}page={{ p }}">{{ p }}</a></li>
+
+          {% endif %}
+
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+
+          <li class="page-item">
+            <a class="page-link" href="?{{ search_post }}page={{ page_obj.next_page_number }}">Вперёд</a>
+          </li>
+
+      {% endif %}
+
+  </ul>
+</nav>
+
+{% endif %}

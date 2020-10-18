@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-content-container container-fluid px-4">
+            <!-- Page Header -->
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                  <span class="text-uppercase page-subtitle"><h4>Настройка профиля</h4></span>
+              </div>
+            </div>
+            <!-- End Page Header -->
+            <!-- Default Light Table -->
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card card-small mb-4 pt-3">
+                  <div class="card-header border-bottom text-center">
+                    <div class="mb-3 mx-auto">
+                        {% if user.avatar %}
+                      <img class="rounded-circle" src="{{ user.avatar.url }}" alt="User Avatar" width="110"> </div>
+                            {% else %}
+                            <img class="rounded-circle" src="{% static 'no_img/no-image.png' %}" alt="User Avatar" width="110"> </div>
+                        {% endif %}
+                    <h4 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h4>
+                    <span class="text-muted d-block mb-2">
+                        {% if user.label %}
+                            {{ user.label }}
+                        {% endif %}
+                    </span>
+
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-4">
+                      <div class="progress-wrapper">
+                      <div class="text-center">
+                          {% if user.facebook %}
+                        <a href="{{ user.facebook }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src=
+                                "{% static 'social/facebook.ico' %}"
+                                         alt="facebook" width="35"></a>
+                          {% endif %}
+                      {% if user.vk %}
+                        <a href="{{ user.vk }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/vk.ico' %}"
+                                                      alt="vkontakte"
+                                         width="35"></a>
+                          {% endif %}
+                      {% if user.instagram %}
+                        <a href="{{ user.instagram }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src=
+                                "{% static 'social/instagram.ico' %}"
+                                         alt="instagram" width="35"></a>
+                          {% endif %}
+                      {% if user.telegram %}
+                        <a href="{{ user.telegram }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/telegram.ico' %}"
+                                         alt="telegram" width="35"></a>
+                          {% endif %}
+                      {% if user.youtube %}
+                      <a href="{{ user.youtube }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/youtube.ico' %}" alt="youtube"
+                                       width="35"></a>
+                          {% endif %}
+                      {% if user.github %}
+                        <a href="{{ user.github }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/github.ico' %}" alt="github"
+                                         width="35"></a>
+                          {% endif %}
+                      {% if user.site %}
+                        <a href="{{ user.site }}" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded-circle" src="{% static 'social/site.ico' %}"
+                                                        alt="ownsite" width="35"></a>
+                          {% endif %}
+                      </div>
+                      </div>
+                    </li>
+                      {% if user.bio %}
+                    <li class="list-group-item p-4">
+                      <strong class="text-muted d-block mb-2">Био</strong>
+                      <span>{{ user.bio }}</span>
+                    </li>
+                      {% endif %}
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">Настройка аккаунта</h6>
+                      <a href="{% url "password_reset" %}" class="badge badge-info fa-pull-right">Изменить пароль
+                          аккаунта?</a>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-3">
+                      <div class="row">
+                        <div class="col">
+
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form.non_field.errors}} <!-- Вывод ошибок для скрытыx полей -->
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                                 {{ form.first_name }}
+                              </div>
+                                <div class="errorlist">{{form.first_name.errors}}</div>
+
+                              <div class="form-group col-md-6">
+                                <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                                  {{ form.last_name }}
+                              </div>
+                                <div class="errorlist">{{form.last_name.errors}}</div>
+                            </div>
+
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                  {{ form.email }}
+                                </div>
+                                <div class="errorlist">{{form.email.errors}}</div>
+                              <div class="form-group col-md-6">
+                                <label for="{{ form.username.id_for_label }}">User Name</label>
+                                  {{ form.username }}
+                                  <div class="errorlist">{{form.username.errors}}</div>
+                                </div>
+                            </div>
+
+                                <div class="form-row">
+                                <div class="form-group col-md-8">
+                              <label for="{{ form.label.id_for_label }}">Статус</label>
+                              {{ form.label }}
+                                  <div class="errorlist">{{form.label.errors}}</div>
+                            </div>
+                                <div class="form-group col-md-12">
+                                    <label for="{{ form.avatar.id_for_label }}">Лого</label>
+                                    {{ form.avatar }}
+                                    <div class="errorlist">{{form.avatar.errors}}</div>
+                                </div>
+                                </div>
+
+                            <div class="form-row">
+                              <div class="form-group col-md-12">
+                                <label for="{{ form.bio.id_for_label }}">Биография</label>
+                                {{ form.bio }}
+                                  <div class="errorlist">{{form.bio.errors}}</div>
+                              </div>
+                            </div>
+                             <div class="form-row">
+                              <div class="card-header border-bottom">
+                                 <h6 class="m-0">Добавьте ваши соц.сети</h6>
+                            </div>
+                            <div class="form-row pt-3">
+                                <div class="form-group col-md-12">
+                                <label for="{{ form.facebook.id_for_label }}">Facebook</label>
+                                {{ form.facebook }}
+                                  <div class="errorlist">{{form.facebook.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.vk.id_for_label }}">ВКонтакте</label>
+                                {{ form.vk }}
+                                  <div class="errorlist">{{form.vk.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.instagram.id_for_label }}">Instagram</label>
+                                {{ form.instagram }}
+                                  <div class="errorlist">{{form.instagram.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.telegram.id_for_label }}">Telegram</label>
+                                {{ form.telegram }}
+                                  <div class="errorlist">{{form.telegram.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.youtube.id_for_label }}">YouTube</label>
+                                {{ form.youtube }}
+                                  <div class="errorlist">{{form.youtube.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.github.id_for_label }}">GitHub</label>
+                                {{ form.github }}
+                                  <div class="errorlist">{{form.github.errors}}</div>
+                              </div>
+
+                                 <div class="form-group col-md-12">
+                                <label for="{{ form.site.id_for_label }}">Ваш сайт или блог</label>
+                                {{ form.site }}
+                                  <div class="errorlist">{{form.site.errors}}</div>
+                              </div>
+                            </div>
+
+                            </div>
+                            <button type="submit" class="btn btn-accent">Обновить</button>
+                          </form>
+
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- End Default Light Table -->
+          </div>
+
+{% endblock content %}

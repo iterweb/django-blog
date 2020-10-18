@@ -1,0 +1,32 @@
+{% load static %}
+
+<form action="{% url 'like_post' post.slug %}" method="POST">
+    {% csrf_token %}
+
+{% if request.user.is_authenticated %}
+
+    {% if liked %}
+
+        <button type="submit" name="post_id" value="{{ post.slug }}" class="hidden_for_form"><img
+                class="rounded-circle" src="{% static 'like/like.ico' %}" width="30" data-toggle="tooltip"
+                title="Лайк поставлен!"></button>
+
+     {% else %}
+
+        <button type="submit" name="post_id" value="{{ post.slug }}" class="hidden_for_form"><img
+                class="rounded-circle" src="{% static 'like/pre-like.ico' %}" width="30" data-toggle="tooltip"
+                title="Нравиться!"></button>
+
+    {% endif %}
+
+{% else %}
+
+    <a href="{% url 'login' %}" ><img data-toggle="tooltip" data-placement="top" title="Реакции могут ставить, только,
+    пользователи сайта!"
+                                      class="rounded-circle" src="{% static 'like/like.ico' %}" width="30"></a>
+
+{% endif %}
+
+    {{ total_likes }}
+
+</form>

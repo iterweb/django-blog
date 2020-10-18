@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Новый пароль | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <br>
+    <div class="row">
+
+<div class="container d-flex h-100 mb-4">
+<div class="row align-self-center w-100">
+    <div class="col-lg-6 mx-auto">
+                <div class="card card-small">
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0 font-weight-bold">Введите ваш новый пароль</h6>
+                  </div>
+
+                    <div class="form-group col-md-12">
+{% if validlink %}
+                        <form action="." method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="mb-2 btn btn-sm btn-outline-primary mr-1">Изменить мой
+                            пароль</button>
+                        </form>
+    {% else %}
+        <p>Ссылка для сброса пароля недействительна, возможно, потому что она
+             уже использовалась. Запросите новый сброс пароля.</p>
+    {% endif %}
+                    </div>
+
+              </div>
+    </div></div></div>
+
+    </div>
+
+{% endblock content %}

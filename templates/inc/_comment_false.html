@@ -1,0 +1,36 @@
+{% load static %}
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        {% for sub_com in comments_false %}
+
+            <div class="media mt-3 editContent">
+                <a class="pr-3">
+                    {% if sub_com.name.avatar %}
+                        <img class="rounded-circle" src="{{ sub_com.name.avatar.url }}" width="70">
+                    {% else %}
+                        <img class="rounded-circle" src="{% static 'no_img/no-image.png' %}" width="70">
+
+                    {% endif %}
+                </a>
+                <div class="media-body">
+                    {% if sub_com.name.first_name %}
+                        <h6 class="mb-0"><a href="{{ sub_com.name.get_absolute_url }}">{{ sub_com.name.first_name }}
+                            {{ sub_com.name.last_name }}</a></h6>
+                    {% else %}
+                        <h6 class="mb-0"><a href="{{ sub_com.name.get_absolute_url }}">{{ sub_com.name }}</a></h6>
+                    {% endif %}
+                    <div class="font-weight-light mt-1" style="font-size: 14px">
+
+                        {{ sub_com.text }}
+
+                    </div>
+
+                    <a href="{% url 'update_comment' sub_com.id %}" target="_blank">🖉 Редактировать и опубликовать</a>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div></div>

@@ -1,0 +1,37 @@
+{% load static %}
+
+{% autoescape on %}
+
+{% with "http://127.0.0.1:8000" as host %}
+
+<a href="https://vk.com/share.php?url={{ host }}
+{{ post.get_absolute_url }}&title={{ post.title }}&description={{ post.content|truncatewords:15 }}&noparse=true"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/vk.ico' %}" alt="vkontakte" width="30">
+</a>
+<a href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ host }}{{ post.get_absolute_url }}"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/twitter.ico' %}" alt="twitter" width="30">
+</a>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ host }}{{ post.get_absolute_url }}"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/facebook.ico' %}" alt="facebook" width="30">
+</a>
+<a href="https://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl={{ host }}{{ post.get_absolute_url }}&st.comments={{ post.content|truncatewords:15 }}"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/class.ico' %}" alt="odnoklassniki" width="30">
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ host }}{{ post.get_absolute_url }}"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/linkedin.ico' %}" alt="linkedin" width="30">
+</a>
+<a href="https://telegram.me/share/url?url={{ host }}{{ post.get_absolute_url }}"
+   target="_blank" rel="nofollow">
+    <img class="rounded-circle" src="{% static 'share/telegram.ico' %}" alt="telegram" width="30">
+</a>
+
+
+
+{% endwith %}
+
+{% endautoescape %}

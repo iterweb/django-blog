@@ -1,0 +1,106 @@
+{% load static %}
+{% autoescape on %}
+<!doctype html>
+<html class="no-js h-100" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>
+    {% block title %}
+      Shards Dashboard Lite
+    {% endblock title %}
+  </title>
+
+    {% block description %}
+      <meta name="description" content="free Bootstrap admin dashboard">
+    {% endblock description %}
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="{% static 'css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/icon.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" id="main-stylesheet" href="{% static 'css/shards-dashboards.1.1.0.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/extras.1.1.0.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+  
+  <body class="h-100">
+
+  {% block left-popup %}{% endblock left-popup %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Main Sidebar -->
+        {% include 'inc/_menu.html' %}
+        <!-- End Main Sidebar -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+          <div class="main-navbar sticky-top bg-white">
+            <!-- Main Navbar -->
+          {% include 'inc/_header.html' %}
+          </div>
+          <!-- / .main-navbar -->
+
+          <div class="main-content-container container-fluid px-4">
+            <!-- Page Header -->
+
+              {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger fade show mb-0" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <i class="fas fa-info-circle mx-2"></i>
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags }} fade show mb-0" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <i class="fas fa-info-circle mx-2"></i>
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+              {% endif %}
+
+
+
+              {% block page-header %}{% endblock page-header %}
+
+              {% block ads %}{% endblock ads %}
+
+
+              {% block content %}{% endblock content %}
+
+              {% block pagination %}{% endblock pagination %}
+          </div>
+
+          {% include 'inc/_footer.html' %}
+        </main>
+      </div>
+    </div>
+
+  {% block right-popup %}{% endblock right-popup %}
+
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/shards.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sharrre.min.js' %}"></script>
+	<script src="{% static 'js/extras.1.1.0.min.js' %}"></script>
+	<script src="{% static 'js/shards-dashboards.1.1.0.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script async defer src="{% static 'js/buttons.js' %}"></script>
+    <script async defer src="{% static 'js/my.js' %}"></script>
+
+  </body>
+</html>
+{% endautoescape %}
