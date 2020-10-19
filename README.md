@@ -22,4 +22,4 @@ pip install --user -r requirements.txt
 * Поиск по сайту
 * Каптча
 * Редактор CKeditor
-
+* Модерация и редактирование поста
