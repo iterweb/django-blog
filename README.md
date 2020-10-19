@@ -21,4 +21,5 @@ pip install --user -r requirements.txt
 * Пагинация
 * Поиск по сайту
 * Каптча
+* Редактор CKeditor
 
