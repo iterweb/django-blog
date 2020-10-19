@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_group_filter %}
+
+{% block content %}
+
+    {% if request.user|is_group:"Redactor" or request.user|is_group:"Admin" %}
+
+ <div class="row mt-4">
+        <!-- Users Stats -->
+        <div class="col-lg-8 mb-4">
+            <div class="card card-small"> <!-- h-100 -->
+                <div class="card-header border-bottom">
+                    <h5 class="m-0">Форма редактирования поста</h5>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                {{form.non_field.errors}}
+                            <div class="form-row">
+                              <div class="form-group col-md-8">
+                                <label for="{{ form.title.id_for_label }}">Заголовок</label>
+                                 {{ form.title }}
+                              </div>
+                                <div class="errorlist">{{form.title.errors}}</div>
+
+                                <div class="form-group col-md-4">
+                                <label for="{{ form.category.id_for_label }}">Категория</label>
+                                  {{ form.category }}
+                              </div>
+                                <div class="errorlist">{{form.category.errors}}</div>
+
+                              <div class="form-group col-md-12">
+                                <label for="{{ form.photo.id_for_label }}">Превью (Основная картинка)</label>
+                                  {{ form.photo }}
+                              </div>
+                                <div class="errorlist">{{form.photo.errors}}</div>
+                            </div>
+
+                            <div class="form-row">
+                              <div class="form-group col-md-12">
+                                <label for="{{ form.content.id_for_label }}">Текст поста</label>
+                                   {{ form.media }}
+                                {{ form.content }}
+                                  <div class="errorlist">{{form.content.errors}}</div>
+                              </div>
+                            </div>
+
+                                    <div class="form-row">
+                              <div class="form-group col-md-4">
+                                <label for="{{ form.file.id_for_label }}">Файл</label>
+                                {{ form.file }}
+                                  <div class="errorlist">{{form.file.errors}}</div>
+                              </div>
+                                    <div class="form-group col-md-8">
+                                <label for="{{ form.is_published.id_for_label }}">Опубликовать?</label>
+
+                                {{ form.is_published }}
+
+                                  <div class="errorlist">{{form.is_published.errors}}</div>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-accent">Принять</button>
+                          </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- End Users Stats -->
+        <!-- Users By Device Stats -->
+        <div class="col-lg-4 mb-3">
+
+            <div class="card card-small sticky"> <!-- h-100 -->
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Основная картинка на данный момент</h6>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            {{ post.get_photo }}
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    {% else %}
+
+        {% include 'inc/_access_denied.html' %}
+
+    {% endif %}
+
+
+{% endblock content %}

@@ -17,31 +17,7 @@
 
     {% else %}
 
-        <div class="row">
-            <div class="main-content-container container-fluid mt-5 container d-flex h-100">
-
-                <!-- Default Light Table -->
-                <div class="row align-self-center w-100">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="card card-small mb-4 pt-3">
-                            <div class="card-header border-bottom text-center">
-                                <div class="mb-3 mx-auto">
-                                    <img class="rounded-circle" src="{% static 'no_img/access-denied.png' %}" alt="{{block.super}}" width="110"> </div>
-
-                                <span class="text-muted d-block mb-2">У вас нет прав на просмотр этого контента</span>
-
-                                <a class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2" href="{% url 'home' %}"
-                                   role="button">Главная</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-
-        </div>
+{% include 'inc/_access_denied.html' %}
 
     {% endif %}
 

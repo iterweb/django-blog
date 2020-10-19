@@ -165,3 +165,22 @@ class CreatePostForm(forms.ModelForm):
         widgets = {
             'category': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+class EditPostForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Как называется ваш пост'}))
+    photo = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    content = forms.CharField(widget=CKEditorWidget(attrs={'class': 'form-control', 'rows': 10}))
+    file = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    is_published = forms.BooleanField(error_messages={'required': 'Для публикации поста - установите галочку'},
+                                      widget=forms.CheckboxInput(
+        attrs={'class': 'custom-control custom-checkbox mb-1 ml-3'}
+    ))
+
+    class Meta:
+        model = Post
+        fields = ('title', 'photo', 'content', 'category', 'file', 'is_published')
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-control'}),
+        }

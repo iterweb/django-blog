@@ -11,7 +11,7 @@ from random import randint
 from django.conf import settings
 
 from .forms import UserRegisterForm, UserLoginForm, UserEditForm, UserResetForm, ChangeUserPassword, CommentForm, \
-    EditCommentForm, CreatePostForm
+    EditCommentForm, CreatePostForm, EditPostForm
 from .models import CustomUser, Post, Tag, Category, Comment
 
 
@@ -245,4 +245,14 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('home')
+
+
+class EditPostView(UpdateView):
+    template_name = 'articles/edit-post.html'
+    model = Post
+    form_class = EditPostForm
+
+    def get_success_url(self):
+        messages.success(self.request, 'Пост опубликован')
+        return reverse('edit_post', kwargs={'slug': self.object.slug})
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.utils.safestring import mark_safe
 from slugify import slugify
 
 
@@ -76,6 +77,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
+
+    def get_photo(self):
+        if self.photo:
+            return mark_safe(f'<img src="{self.photo.url}" width="300">')
+        else:
+            return 'Нет фото'
 
     # pip install python-slugify
     # https://github.com/un33k/python-slugify

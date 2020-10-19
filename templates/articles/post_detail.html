@@ -17,6 +17,15 @@
                         <div class="col">
                             {{ post.content|safe }}
 
+                            {% if request.user|is_group:"Redactor" or request.user|is_group:"Admin" %}
+
+                                <div class="col pb-3">
+                                    <a href="{% url 'edit_post' post.slug %}" class="badge badge-pill badge-primary
+                                    fa-pull-right" target="_blank">Редактировать</a>
+                                </div>
+
+                            {% endif %}
+
                             <div class="row border-top mt-3">
                                 <div class="col-lg-2 mt-2"><a href="{{ post.category.get_absolute_url }}"
                                                               class="badge badge-pill badge-success">{{ post.category }}</a></div>
@@ -124,8 +133,8 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col">
-                        кккккккккккккккккeeeeeeeeeeeeeeeeeeeeeee
-
+         <a href="#" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded"
+                    src="{% static 'no_img/wwww.png' %}" alt="adv" width="300"></a>
                     </div>
 
 
@@ -207,19 +216,21 @@
         </div>
     </div>
 
-      {% if request.user|is_group:"Moderator" or request.user|is_group:"Admin" %}
+    {% if request.user|is_group:"Moderator" or request.user|is_group:"Admin" %}
 
-    <div class="col-lg-12 mb-4">
-        <div class="card card-small"> <!-- h-100 -->
-            <div class="card-header border-bottom">
-                <h6 class="m-0">Не опубликованные комментарии</h6>
-            </div>
+        <div class="col-lg-12 mb-4">
+            <div class="card card-small"> <!-- h-100 -->
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Не опубликованные комментарии</h6>
+                </div>
 
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col">
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
 
-                                {% include 'inc/_comment_false.html' %}
+                            {% include 'inc/_comment_false.html' %}
+
+                        </div>
 
                     </div>
 
@@ -229,15 +240,8 @@
 
         </div>
 
-    </div>
-
-     {% endif %}
-
-
-
+    {% endif %}
 
     </div>
-
-
 
 {% endblock content %}

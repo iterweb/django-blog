@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="row">
+    <div class="main-content-container container-fluid mt-3 container d-flex h-100">
+
+        <!-- Default Light Table -->
+        <div class="row align-self-center w-100">
+            <div class="col-lg-6 mx-auto">
+                <div class="card card-small mb-4 pt-3">
+                    <div class="card-header border-bottom text-center">
+                        <div class="mb-3 mx-auto">
+                            <img class="rounded-circle" src="{% static 'no_img/access-denied.png' %}" alt="{{block.super}}" width="110"> </div>
+
+                        <span class="text-muted d-block mb-2">У вас нет прав на просмотр этого контента</span>
+
+                        <a class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2" href="{% url 'home' %}"
+                           role="button">Главная</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card card-small mb-3">
+            <div class="card-header border-bottom">
+                <h6 class="m-0">Реклама</h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-3">
+                    <div class="row">
+
+                        <div class="col-lg-3 ">
+                            <a href="#" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded"
+                                                                                                src="{% static 'no_img/wwww.png' %}" alt="adv" width="218"></a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded"
+                                                                                                src="{% static 'no_img/wwww1.jpg' %}" alt="adv" width="218"></a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded"
+                                                                                                src="{% static 'no_img/wwww.png' %}" alt="adv" width="218"></a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#" rel="noopener noreferrer nofollow" target="_blank"><img class="rounded"
+                                                                                                src="{% static 'no_img/wwww1.jpg' %}" alt="adv" width="218"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
