@@ -25,6 +25,7 @@ pip install --user -r requirements.txt
 * Кеширование
 * Счетчик постов сайта
 * Фейковый счетчик "Сейчас на сайте" (c учетом дня и ночи)
+
 ![alt tag](https://github.com/pro100git/django-blog/blob/main/Screenshot/fake_user.png "django blog")​
 * Модерация и редактирование поста
 
