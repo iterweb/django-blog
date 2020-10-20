@@ -1,8 +1,27 @@
 # django-blog
 
-Это мой первый тестовый блог на django, над которым я еще работаю!
+Это мой первый тестовый блог на django!
 
 ![alt tag](https://github.com/pro100git/django-blog/blob/main/Screenshot/Screenshot.png "django blog")​
+
+### Демо
+http://pythondjangotest.pythonanywhere.com/ (This site will be disabled on Wednesday 20 January 2021)<br/>
+**Супер user**<br/>
+LOGIN = admin<br/>
+PASSWORD = k3kQhQ65E3aHcqJ<br/>
+
+#### Без доступа к админке:
+**Группа Admin**<br/>
+LOGIN = qwerty266<br/>
+PASSWORD = HBF3rgfwg<br/>
+
+**Группа Redactor**<br/>
+LOGIN = qwerty26<br/>
+PASSWORD = v783gofag
+
+**Группа Moderator**<br/>
+LOGIN = qwerty1<br/>
+PASSWORD = k3kQhQ65E3aHcqJ
 
 ### Зависимости:
 pip install --user -r requirements.txt
