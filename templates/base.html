@@ -15,7 +15,7 @@
   </title>
 
     {% block description %}
-      <meta name="description" content="free Bootstrap admin dashboard">
+      <meta name="description" content="django blog">
     {% endblock description %}
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,7 +31,9 @@
   
   <body class="h-100">
 
-  {% block left-popup %}{% endblock left-popup %}
+  {% block left-popup %}
+      {% include 'inc/_left-popup.html' %}
+  {% endblock left-popup %}
 
     <div class="container-fluid">
       <div class="row">

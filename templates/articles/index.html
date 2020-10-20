@@ -1,5 +1,6 @@
 ﻿{% extends 'base.html' %}
 {% load static %}
+{% load cache %}
 
 {% block title %}
     {{ title }} | {{ block.super }}
@@ -8,23 +9,63 @@
 {% block page-header %}
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Dashboard</span>
-                <h3 class="page-title">Blog Overview</h3>
+                <span class="text-uppercase page-subtitle">Реклама</span>
               </div>
             </div>
 {% endblock page-header %}
 
-{% block left-popup %}
-    {% include 'inc/_left-popup.html' %}
-{% endblock left-popup %}
 
 {% block ads %}
     {% include 'ads/_ads-5.html' %}
 {% endblock ads %}
 
 {% block content %}
+    <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Популярные посты</span>
+              </div>
+            </div>
+<div class="row">
+{% for popular in populars %}
+              <div class="col-lg-6 col-sm-12 mb-4">
+                <div class="card card-small card-post card-post--aside card-post--1">
+                  <div class="card-post__image" style="background-image: url({% if popular.photo %}
+                      {{ popular.photo.url }}
+                      {% else %}
+                      {% static 'no_img/no_post_image.png' %}
+                      {% endif %});">
+                    <a href="{{ popular.category.get_absolute_url }}" class="card-post__category badge badge-pill
+                    badge-info"
+                    >{{ popular.category }}</a>
+                    <div class="card-post__author d-flex">
+                      <a href="{% url 'user_profile' popular.author.pk %}" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url({% if post.author.avatar %}
+                      {{ post.author.avatar.url }}
+                      {% else %}
+                      {% static 'no_img/no_post_image.png' %}
+                      {% endif %});">{{ popular.author.first_name }} {{ popular.author.last_name }}</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="text-fiord-blue" href="{{ popular.get_absolute_url }}">
+                          {{ popular.title|truncatechars:20 }}</a>
+                    </h5>
+                    <p class="card-text d-inline-block mb-3">{{ popular.content|safe|truncatewords:15 }}</p>
+                    <span class="text-muted">{{ popular.updated_at }}</span>
+                  </div>
+                </div>
+              </div>
+{% endfor %}
+            </div>
+
+    <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Свежие посты</span>
+              </div>
+            </div>
 
 <div class="row">
+
 {% for post in posts %}
 
               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
@@ -59,6 +100,7 @@
                 </div>
               </div>
 {% endfor %}
+
 </div>
 {% endblock content %}
 

@@ -1,6 +1,7 @@
 {% load static %}
 {% load user_group_filter %}
 {% load comment_false_tmpl %}
+{% load post_false_tmpl %}
 
 
 <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
@@ -19,27 +20,9 @@
 
     <ul class="navbar-nav border-left flex-row ">
 
-        <li class="nav-item border-right dropdown notifications">
-            <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="nav-link-icon__wrapper">
-                    <i class="material-icons">&#9993;</i>
-                    <span class="badge badge-pill badge-danger">3</span>
-                </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
-
-                <div class="row ml-1 mr-1 mt-2">
-                    <div class="col-12">
-                        <a style="font-size: 15px" class="font-weight-bold" href="#" target="_blank">eeeeeeee</a>
-                    </div>
-                    <div class="col-12">
-                        dddddddddddddddd
-                    </div>
-
-                </div>
-
-            </div>
-        </li>
+    {% if request.user|is_group:"Redactor" or request.user|is_group:"Admin" %}
+        {% posts_false %}
+    {% endif %}
 
         {% if request.user|is_group:"Moderator" or request.user|is_group:"Admin" %}
 
@@ -61,7 +44,7 @@
 
             <li class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle text-nowrap px-2" data-toggle="dropdown" href="#" role="button"
+                <a class="nav-link dropdown-toggle text-nowrap px-2" data-toggle="dropdown" role="button"
                    aria-haspopup="true" aria-expanded="false">
                     {% if user.avatar %}
                         <img class="user-avatar rounded-circle mr-2" src="{{ user.avatar.url }}" alt="User Avatar">

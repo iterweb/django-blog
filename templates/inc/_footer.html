@@ -1,20 +1,31 @@
+{% load count_all_posts_tmpl %}
+{% load fake_user_tmpl %}
+{% load cache %}
+
 <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">О нас</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Services</a>
+        <a class="nav-link" href="https://github.com/pro100git">GitHub</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Обратная связь</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Products</a>
+
+        {% cache 7 fake_user_count %}
+
+      <li class="nav-item border-left ml-4">
+        <a class="nav-link">Сейчас на сайте: <span class="badge badge-info">{% fake_user_count %}</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Blog</a>
+
+        {% endcache %}
+
+      <li class="nav-item border-left ml-4">
+        <a class="nav-link">Всего постов: <span class="badge badge-primary">{% count_posts %}</span></a>
       </li>
+
     </ul>
     <span class="copyright ml-auto my-auto mr-2"><script>
   document.write("Copyright &copy; "+ new Date().getFullYear());

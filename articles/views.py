@@ -83,6 +83,7 @@ class HomePage(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Главная'
+        context['populars'] = Post.objects.order_by('-views')[:4]
         return context
 
     def get_queryset(self):
