@@ -6,9 +6,6 @@
 
 ### Демо
 http://pythondjangotest.pythonanywhere.com/ (This site will be disabled on Wednesday 20 January 2021)<br/>
-**Супер user**<br/>
-LOGIN = admin<br/>
-PASSWORD = k3kQhQ65E3aHcqJ<br/>
 
 #### Без доступа к админке:
 **Группа Admin**<br/>
