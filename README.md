@@ -22,11 +22,9 @@ pip install --user -r requirements.txt
 * Поиск по сайту
 * Каптча
 * Редактор CKeditor
-<<<<<<< HEAD
 * Кеширование
 * Счетчик постов сайта
 * Фейковый счетчик "Сейчас на сайте" (c учетом дня и ночи)
-
-=======
+![alt tag](https://github.com/pro100git/django-blog/blob/main/Screenshot/fake_user.png "django blog")​
 * Модерация и редактирование поста
->>>>>>> 97152f60862722714cd16f59736ebe6aaf1bc7d3
+
