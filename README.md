@@ -8,10 +8,6 @@
 http://pythondjangotest.pythonanywhere.com/ (This site will be disabled on Wednesday 20 January 2021)<br/>
 
 #### Без доступа к админке:
-**Группа Admin**<br/>
-LOGIN = qwerty266<br/>
-PASSWORD = HBF3rgfwg<br/>
-
 **Группа Redactor**<br/>
 LOGIN = qwerty26<br/>
 PASSWORD = v783gofag
