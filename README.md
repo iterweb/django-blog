@@ -5,7 +5,7 @@
 ![alt tag](https://github.com/pro100git/django-blog/blob/main/Screenshot/Screenshot.png "django blog")​
 
 ### Демо
-http://pythondjangotest.pythonanywhere.com/ (This site will be disabled on Wednesday 20 January 2021)<br/>
+http://pythondjangotest.pythonanywhere.com/<br/>
 
 #### Без доступа к админке:
 **Группа Redactor**<br/>
