@@ -36,7 +36,7 @@ pip install --user -r requirements.txt
 * Редактор CKeditor
 * Кеширование
 * Счетчик постов сайта
-* [Фейковый счетчик](https://github.com/pro100git/django_fake_counter) "Сейчас на сайте" (c учетом дня и ночи)
+* [Фейковый счетчик](https://github.com/pro100git/django_fake_counter) "Сейчас на сайте" (c учетом дня и ночи)<br>
 ![alt tag](https://github.com/pro100git/django-blog/blob/main/Screenshot/fake_user.png "django blog")​
 * Модерация и редактирование поста
 
